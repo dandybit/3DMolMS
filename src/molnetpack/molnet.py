@@ -75,7 +75,7 @@ class MolNet():
 		torch.cuda.manual_seed(seed)
 		return
 
-	def load_data(self, path_to_test_data): 
+	def load_data(self, path_to_test_data, n_workers=1): 
 		test_format = path_to_test_data.split('.')[-1]
 		if test_format == 'csv': # convert csv file into pkl 
 			self.pkl_dict = csv2pkl_wfilter(path_to_test_data, self.data_config['encoding'])
@@ -97,7 +97,7 @@ class MolNet():
 							valid_set,
 							batch_size=1, 
 							shuffle=False, 
-							num_workers=0, 
+							num_workers=n_workers, 
 							drop_last=True)
 
 	def load_checkpoint(self, task_name): 
